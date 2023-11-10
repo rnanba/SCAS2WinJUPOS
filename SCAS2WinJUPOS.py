@@ -10,6 +10,8 @@ from decimal import Decimal, ROUND_HALF_UP
 import re
 from argparse import ArgumentParser
 
+VERSION = '1.0.0'
+
 sharpcap_file_re = re.compile('(\d\d_\d\d_\d\d)\.CameraSettings\.txt$', re.A)
 start_capture_re = re.compile('StartCapture\s*=\s*(.+)$', re.A)
 mid_capture_re = re.compile('MidCapture\s*=\s*(.+)$', re.A)
@@ -76,6 +78,7 @@ argparser.add_argument('-l', dest='link', action='store_true', help='create hard
 argparser.add_argument('-o', dest='observer', default=get_user(), help='observer name. by default, value of USER or USERNAME environment variable is used.')
 argparser.add_argument('-i', dest='imageinfo', help='image information. template {cam} is expanded to represent camera name. template {ff} is expended to free field value of AS!3.')
 argparser.add_argument('--dry-run', dest='dry_run', action='store_true', help='do not copy (or hardlink) files.')
+argparser.add_argument('--version', action='version', version=f'%(prog)s {VERSION}')
 args = argparser.parse_args()
 
 message_prefix = ''
