@@ -115,6 +115,7 @@ for cs in glob.glob(os.path.join(args.sc_dir, "*.CameraSettings.txt")):
             if (r := camera_re.match(line)) and not meta['camera']:
                 camera = r.group(1)
                 if camera:
+                    camera = re.sub('\([^)]*\)', '', camera)
                     camera = camera.replace(' ', '').replace('-', '')
                 meta['camera'] = camera
             elif (r := start_capture_re.match(line)):
