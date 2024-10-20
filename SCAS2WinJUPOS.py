@@ -10,20 +10,20 @@ from decimal import Decimal, ROUND_HALF_UP
 import re
 from argparse import ArgumentParser
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 
-sharpcap_file_re = re.compile('(\d\d_\d\d_\d\d)\.CameraSettings\.txt$', re.A)
-start_capture_re = re.compile('StartCapture\s*=\s*(.+)$', re.A)
-mid_capture_re = re.compile('MidCapture\s*=\s*(.+)$', re.A)
-end_capture_re = re.compile('EndCapture\s*=\s*(.+)$', re.A)
-sharpcap_time_re = re.compile('([^.]+\.\d{6})\d*(.+)', re.A)
-frame_count_re = re.compile('FrameCount\s*=\s*(\d+)$', re.A)
-camera_re = re.compile('\[(.+)\]$')
-autostakkert_file_re = re.compile('(\d\d_\d\d_\d\d)_([^_]+).*\.(\w+)$', re.A)
-autostakkert_limit_re = re.compile('.*_limit(\d+)-(\d+)[_.].*')
-template_split_re = re.compile('(\{\w+\})')
-template_token_re = re.compile('\{(\w+)\}$')
-ng_field_search_re = re.compile('[-\\/:*?"><|&(){}^=;!\'+,`~]')
+sharpcap_file_re = re.compile(r'(\d\d_\d\d_\d\d)\.CameraSettings\.txt$', re.A)
+start_capture_re = re.compile(r'StartCapture\s*=\s*(.+)$', re.A)
+mid_capture_re = re.compile(r'MidCapture\s*=\s*(.+)$', re.A)
+end_capture_re = re.compile(r'EndCapture\s*=\s*(.+)$', re.A)
+sharpcap_time_re = re.compile(r'([^.]+\.\d{6})\d*(.+)', re.A)
+frame_count_re = re.compile(r'FrameCount\s*=\s*(\d+)$', re.A)
+camera_re = re.compile(r'\[(.+)\]$')
+autostakkert_file_re = re.compile(r'(\d\d_\d\d_\d\d)_([^_]+).*\.(\w+)$', re.A)
+autostakkert_limit_re = re.compile(r'.*_limit(\d+)-(\d+)[_.].*')
+template_split_re = re.compile(r'(\{\w+\})')
+template_token_re = re.compile(r'\{(\w+)\}$')
+ng_field_search_re = re.compile(r'[-\\/:*?"><|&(){}^=;!\'+,`~]')
 
 def get_user():
     user = None
@@ -115,7 +115,7 @@ for cs in glob.glob(os.path.join(args.sc_dir, "*.CameraSettings.txt")):
             if (r := camera_re.match(line)) and not meta['camera']:
                 camera = r.group(1)
                 if camera:
-                    camera = re.sub('\([^)]*\)', '', camera)
+                    camera = re.sub(r'\([^)]*\)', '', camera)
                     camera = camera.replace(' ', '').replace('-', '')
                 meta['camera'] = camera
             elif (r := start_capture_re.match(line)):
