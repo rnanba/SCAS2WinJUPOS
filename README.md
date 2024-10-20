@@ -1,4 +1,4 @@
-# SCAS2WinJUPOS
+# SCAS2WinJUPOS v1.0.1
 
 ## 概要
 
@@ -43,7 +43,7 @@ SCAS2WinJUPOS.py [-p pattern] [-l] [-o observer] [-i imageinfo] [--dry-run] sc_d
 
 | 変数名 | 説明 |
 |--------|------|
-| `cam`  | カメラ名です。値として SharpCap 4 が保存した *.CameraSettins.txt の先頭行のセクション名が使用されます。名前に含まれる空白は除去されます(例: ZWO ASI290MM → ZWOASI290MM)。|
+| `cam`  | カメラ名です。値として SharpCap 4 が保存した *.CameraSettins.txt の先頭行のセクション名が使用されます。名前に含まれる空白と末尾の接続先情報は除去されます(例: ZWO ASI290MM (via USB3) → ZWOASI290MM)。|
 | `ff`   | AutoStakkert! 3 のファイル名に含まれる Free Field 値です。値に含まれる空白とハイフンは除去されます。<br>AutoStakkert! 3 のファイル名パターン設定の先頭部分が `[bn][ff]` になっているものと仮定します(それがデフォルト設定です)。ただし、パターンに曖昧さがあるため Free Field が指定されていない場合はその次のフィールド値が使用されるという制限があります。|
 
 ## 使用例
@@ -105,3 +105,11 @@ SCAS2WinJUPOS.py -o RN -i '{cam}' . AS_F500 WinJUPOS
 ## ライセンス
 
 MITライセンスです。
+
+## 更新履歴
+
+- 2024-10-20: 1.0.1
+  - cam 変数値の加工処理で「(via USB3)」等を削除するようにした。
+  - Python 3.12 以降で SyntaxWarning が出ないようにした。
+- 2023-11-10: 1.0.0
+  - 初版
